@@ -470,6 +470,52 @@ if(ua>-1){
 
 ```
 
+- 移动端iframe兼容性处理
+```
+//在ios设备中iframe会出现无法滚动和宽度无法平铺的问题
+//解决方案：
+<style type="text/css">
+/*解决ios无法适配iframe问题*/
+#ifram {
+  border: 0;
+  width: 1px;
+  min-width: 100%;
+  *width: 100%;
+}
+.frameBox{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-overflow-scrolling: touch; 
+    z-index:99;
+    overflow-y: scroll;
+}
+/*End解决ios无法适配iframe问题*/
+</style>
+<div class="frameBox" style="overflow:auto;">
+    <iframe scrolling="no" id="ifram" width="100%" height="100%" src="http://www.baidu.com"></iframe>
+</div>
+<script stype="text/javascript">
+$(function () {
+    var u = navigator.userAgent, app = navigator.appVersion;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+    if(isAndroid){
+        //这个是安卓操作系统      
+        $("#ifram").attr("scrolling","yes");
+    }else if (isIOS){
+　　　　	//这个是ios操作系统
+    	$("#ifram").attr("scrolling","no");
+    }else{
+    	//pc设备
+    	$("#ifram").attr("scrolling","yes");
+    }   
+});
+</script>
+```
+
 
 - 播放视频不全屏
 ``` HTML
