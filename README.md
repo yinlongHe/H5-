@@ -516,6 +516,29 @@ $(function () {
 </script>
 ```
 
+- iphone设备尺寸判断
+```
+var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+    if (isIOS) {        
+        if (screen.height == 812 && screen.width == 375){
+            //是iphoneX
+        }
+	else if(screen.height == 736 && screen.width == 414){
+	    //是iphone7PLUS,8PLUS,6PLUS
+	}
+	else if(screen.height == 667 && screen.width == 375){
+	    //是iPhone7 - iPhone8 - iPhone6
+	}
+	else if(screen.height == 568 && screen.width == 320){
+	    //是iphone 5
+	}else{
+	    //iphone 4
+	}
+	
+    }
+
+
+```
 
 - 播放视频不全屏
 ``` HTML
